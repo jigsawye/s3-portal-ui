@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const config = require('../config');
 
 module.exports = {
   devtool: 'eval',
@@ -8,14 +9,12 @@ module.exports = {
     './src',
   ],
   output: {
-    path: path.join(__dirname, 'dist'),
+    path: path.join(__dirname, '../dist'),
     filename: 'bundle.js',
   },
   plugins: [
     new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify('production'),
-      },
+      'process.env': JSON.stringify(config),
     }),
   ],
   resolve: {
@@ -46,6 +45,7 @@ module.exports = {
         test: /\.(png|jpg|gif|svg|ttf|eot|woff(2)?)\??.*$/,
         loader: 'url',
         query: {
+          preifx: 'static',
           limit: 100000,
         },
       },

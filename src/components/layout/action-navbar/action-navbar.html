@@ -1,11 +1,23 @@
 <md-toolbar class="md-menu-toolbar">
   <div class="md-toolbar-tools">
     <md-button
-      class="md-raised md-primary" aria-label="Create Bucket"
+      class="md-raised md-primary" aria-label="Upload"
+      ng-click="@A.12"
+      ng-if="@A.19"
+    >
+      <md-icon class="material-icons">file_upload</md-icon>
+      <span translate>Upload</span>
+    </md-button>
+
+    <md-button
+      class="md-raised" aria-label="Create"
+      ng-class="{md-primary: !@A.19}"
       ng-click="actionNav.create($event)"
     >
-      <md-icon class="material-icons">add</md-icon>
-      <span>Create {{ actionNav.type }}</span>
+      <md-icon class="material-icons" ng-hide="@A.19">add</md-icon>
+      <md-icon class="material-icons" ng-show="@A.19">create_new_folder</md-icon>
+      <span ng-hide="@A.19">Create Bucket</span>
+      <span ng-show="@A.19">Create Folder</span>
     </md-button>
 
     <md-menu md-offset="0 44">
@@ -18,21 +30,52 @@
       </md-button>
 
       <md-menu-content width="4">
-        <md-menu-item>
+        <md-menu-item ng-if="@A.19">
           <md-button
-            aria-label="Create Bucket"
-            ng-click="actionNav.create($event)"
+            aria-label="Open File"
+            ng-click="@A.14"
+            ng-disabled="@A.15"
           >
-            <span>Create {{ actionNav.type }}</span>
+            <span translate>Open</span>
+          </md-button>
+        </md-menu-item>
+
+        <md-menu-item ng-if="@A.19">
+          <md-button
+            aria-label="Download File"
+            ng-click="@A.16"
+            ng-disabled="@A.17"
+          >
+            <span translate>Download</span>
+          </md-button>
+        </md-menu-item>
+
+        <md-menu-item ng-if="@A.19">
+          <md-button
+            aria-label="Upload"
+            ng-click="@A.12"
+          >
+            <span translate>Upload</span>
           </md-button>
         </md-menu-item>
 
         <md-menu-item>
           <md-button
-            aria-label="Delete Bucket"
+            aria-label="Create"
+            ng-click="actionNav.create($event)"
+          >
+          <span ng-hide="@A.19">Create Bucket</span>
+          <span ng-show="@A.19">Create Folder</span>
+          </md-button>
+        </md-menu-item>
+
+        <md-menu-item>
+          <md-button
+            aria-label="Delete"
             ng-click="@A.3" ng-disabled="@A.4"
           >
-            <span>Delete {{ actionNav.type }}</span>
+            <span ng-hide="@A.19">Delete Bucket</span>
+            <span ng-show="@A.19">Delete</span>
           </md-button>
         </md-menu-item>
 
@@ -52,7 +95,7 @@
         <md-menu-item>
           <md-button
             aria-label="Properties"
-            ng-click="@A.6" ng-disabled="@A.4"
+            ng-click="@A.6" ng-disabled="@A.18"
           >
             <span>Properties</span>
           </md-button>
